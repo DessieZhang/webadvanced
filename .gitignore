@@ -1,0 +1,22 @@
+# Eclipse
+build/
+.classpath
+.project
+
+# IntelliJ
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+.java-version
+
+# Maven
+logs/
+target/
+.settings/
+
+# Alure
+.allure
+allure-results/

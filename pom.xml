@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+<!--  <parent>-->
+<!--    <artifactId>utaf-core</artifactId>-->
+<!--    <groupId>com.epam.bdd.core</groupId>-->
+<!--    <version>1.0-SNAPSHOT</version>-->
+<!--  </parent>-->
+
+  <groupId>org.epam.bdd.utaf</groupId>
+  <artifactId>utaf-web</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>utaf-web</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <aspectj.version>1.9.7</aspectj.version>
+    <lombok.version>1.18.20</lombok.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.epam.bdd.utaf</groupId>
+      <artifactId>utaf-core</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.10</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.13.2</version>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-picocontainer</artifactId>
+      <version>4.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.0.0-M5</version>
+          <configuration>
+            <systemPropertyVariables>
+              <!--suppress UnresolvedMavenProperty -->
+              <environment>${env}</environment>
+              <!--suppress UnresolvedMavenProperty -->
+              <platform>${platform}</platform>
+              <!--suppress UnresolvedMavenProperty -->
+              <wda>${wda}</wda>
+              <allure.results.directory>target/allure-results</allure.results.directory>
+              <allure.link.issue.pattern>https://example.org/browse/{}</allure.link.issue.pattern>
+              <allure.link.tms.pattern>https://example.org/browse/{}</allure.link.tms.pattern>
+            </systemPropertyVariables>
+            <suiteXmlFiles>
+              <!--suppress UnresolvedMavenProperty -->
+              <suiteXmlFile>${testngXmlFile}</suiteXmlFile>
+            </suiteXmlFiles>
+            <argLine>
+              -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+              -Dcucumber.options="--plugin io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"
+            </argLine>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.aspectj</groupId>
+              <artifactId>aspectjweaver</artifactId>
+              <version>${aspectj.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+          <configuration>
+            <source>15</source>
+            <target>15</target>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+</project>
